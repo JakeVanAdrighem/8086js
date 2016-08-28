@@ -26,6 +26,8 @@ Machine.cycle = function(){
   if(!ExecutionUnit.fetch())
     return undefined;
   ExecutionUnit.decode();
+  ExecutionUnit.execute();
+  return true;
 }
 
 Machine.run = function(){
@@ -33,7 +35,7 @@ Machine.run = function(){
   this.initState();
   while(this.cycle()){
     this.cycles += 1;
-    //displayMachineState();
+    //Interface.update();
   }
   console.log("Executed " + this.cycles + " cycles.");
 }
