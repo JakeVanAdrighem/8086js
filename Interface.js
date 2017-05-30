@@ -10,9 +10,9 @@ var Interface = {
 		// Replace inline comments with a newline.
 		instrs = instrs.replace(/;.*\n/,"\n");
 		// Remove full line comments.
-		// Set the 'multiline' flag for our regex so that we
-		// match for the beginning of a line as well as the
-		// start of the string.
+		// The 2nd argument 'm' sets the multiline flag for
+		// our regex so that we match for the beginning of
+		// the line as well as the start of the string.
 		instrs = instrs.replace(RegExp(/^;.*\n/,'m'),"");
 		// Split into individual instructions.
 		instrs = instrs.split('\n');
