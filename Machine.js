@@ -112,3 +112,4 @@ Machine.initState = function(){
 // to start execution. For development purposes we
 // don't want to have to click something each iteration.
 Machine.run();
+
