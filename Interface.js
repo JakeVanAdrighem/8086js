@@ -31,3 +31,7 @@ Interface.init = function() {
 	// Setup the instruction set
 	// Setup the memory display
 }
+
+Interface.update = function() {
+	return true;
+}
