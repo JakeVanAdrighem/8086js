@@ -2,7 +2,6 @@ var ExecutionUnit = {};
 
 ExecutionUnit.init = function(){
 	this.Instruction;
-	this.Operation;
   	// Retrieve the instruction sequence
   	this.InstructionBuffer = Interface.instructions();
 }
@@ -22,14 +21,13 @@ ExecutionUnit.decode = function(){
 		throw new Error(instr + " instruction not supported.");
 	} else if(!ExecutionUnit.hasOwnProperty(instr)) {
 		throw new Error(instr + " instruction not implemented.");
-	} else {
-		ExecutionUnit[instr](this.Instruction);
 	}
+	this.execute();
 }
 
 ExecutionUnit.execute = function(){
 	console.log("Executing " + this.Instruction[0]);
-	this.Operation(this.Instruction);
+	ExecutionUnit[this.Instruction[0]](this.Instruction.splice(1));
 }
 
 ExecutionUnit.nop = function(ops){
