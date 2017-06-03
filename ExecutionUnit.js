@@ -4,6 +4,9 @@ ExecutionUnit.init = function(){
 	this.Instruction;
   	// Retrieve the instruction sequence
   	this.InstructionBuffer = Interface.instructions();
+	// We reverse the buffer so that 'pop()' can be used
+	// to extract and remove each instr
+	this.InstructionBuffer.reverse();
 }
 
 ExecutionUnit.fetch = function(){
