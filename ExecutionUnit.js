@@ -1,6 +1,5 @@
 var ExecutionUnit = {};
 
-
 ExecutionUnit.init = function(){
 	this.Instruction;
 	this.Operation;
@@ -9,18 +8,10 @@ ExecutionUnit.init = function(){
 }
 
 ExecutionUnit.fetch = function(){
-	this.Instruction = this.getNextInstruction();
-	if(!this.Instruction)
-		return undefined;
+	this.Instruction = this.InstructionBuffer.pop();
+	if(this.Instruction === undefined)
+		return undefined
 	return true;
-}
-
-
-ExecutionUnit.getNextInstruction = function(){
-  nextInstruction = this.InstructionBuffer.pop();
-  if(nextInstruction === undefined)
-  	return undefined;
-  return nextInstruction;
 }
 
 ExecutionUnit.decode = function(){
@@ -62,14 +53,15 @@ ExecutionUnit.aType = function(ops){
 		return ExecutionUnit.add;
 }
 
-ExecutionUnit.call = function(op1) {
-	var target = getTarget(op1);
-}
-
 ExecutionUnit.cType = function(ops){
 	if(ops[0] === "call")
 		ExecutionUnit.call(ops[1]);
 }
+
+ExecutionUnit.call = function(op1) {
+	var target = Machine.getTarget(op1);
+}
+
 
 var ExecutionPathLookupTable = {
 	"a" : ExecutionUnit.aType,

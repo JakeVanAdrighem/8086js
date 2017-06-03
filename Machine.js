@@ -51,14 +51,23 @@ var Registers = {
   AF() { return STATUS[11]; },
   PF() { return STATUS[13]; },
   CF() { return STATUS[15]; }
-}
+};
+
+var Memory;
 
 var Machine = {};
 
-function getTarget(val){
+Machine.getTarget = function(val){
   // Maybe target is a register
-  if(Registers.hasOwnProperty(val))
-      return Registers[val];
+  if(Registers.hasOwnProperty(val)){
+	var ret = Registers[val];
+	if(Array.isArray(ret))
+		return ret;
+	else
+		return ret();
+  } else {
+	throw new Error("Invalid operand " + val);
+  }
   //if(validMemoryAddress(val))
   //  return Address(val);
 }
