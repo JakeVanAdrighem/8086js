@@ -98,6 +98,14 @@ Machine.initState = function(){
   //displayMachineState();
   // Setup the Register table
   this.registers = Interface.registers;
+
+  // Setup the memory
+  // TODO: Setup mem properly. Should support 1MB.
+  // 1MB achieved by:
+  // 16-bit internally + 4bit segment registers
+  //
+  Memory = new Array(10000);
+  Memory.fill(0000000000000000, 0, Memory.length);
 }
 
 // TODO: Replace this with a button on the main page
