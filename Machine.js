@@ -95,7 +95,6 @@ Machine.initState = function(){
   // Start with a NOP on the instruction bus
   ExecutionUnit.init();
   Interface.init();
-  //displayMachineState();
   // Setup the Register table
   this.registers = Interface.registers;
 
