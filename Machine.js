@@ -77,16 +77,15 @@ Machine.cycle = function(){
     return undefined;
   ExecutionUnit.decode();
   ExecutionUnit.execute();
+  Interface.update();
+  this.cycles += 1;
   return true;
 }
 
 Machine.run = function(){
   // Setup chip state for starting execution.
   this.initState();
-  while(this.cycle()){
-    this.cycles += 1;
-    //Interface.update();
-  }
+  while(this.cycle());
   console.log("Executed " + this.cycles + " cycles.");
 }
 
