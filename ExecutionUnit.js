@@ -50,16 +50,23 @@ ExecutionUnit.add = function(ops) {
 	var target = getTarget(op1);
 }
 
-ExecutionUnit.aType = function(ops){
-	if(ops.length !== 3)
-		throw new Error("Invalid operation " + ops);
-	if(ops[0] === "add")
-		return ExecutionUnit.add;
+function convertRegToImm(val){
+	var res = 0;
+	var tracking = 1;
+	var size = val.size();
+	for(var i = 0; i < size; i++){
+		res += (tracking * val.pop());
+		tracking *= 2;
+	}
+	return res;
 }
 
-ExecutionUnit.cType = function(ops){
-	if(ops[0] === "call")
-		ExecutionUnit.call(ops[1]);
+function convertImmToReg(val){
+	var reg = [];
+	while(val != 0){
+		reg.un.shift(val & 0x1);
+		val = val >> 1;
+	}
 }
 
 ExecutionUnit.call = function(op1) {
