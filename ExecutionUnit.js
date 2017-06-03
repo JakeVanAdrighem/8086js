@@ -36,14 +36,26 @@ ExecutionUnit.nop = function(ops){
 	return true;
 }
 
-// Two types of additions:
-// 8bit and 16bit. We have 8bit
-// when dealing with the lower
-// or higher alias of a 16bit
-// register. 16bit is when we're
-// operating on a full register.
-// When dealing with memory, ops
-// are always 16bit.
+ExecutionUnit.executionError = function(operation, ...operands){
+	var operands = [operands];
+	throw new Error("Unable to execute operation " + operation + " with operand(s) " + operands);
+}
+
+
+/* Notes for all instruction types:             */
+/* When handling instructions with 2 operands   */
+/* the operands must be the same size.          */
+
+
+/*
+ADD instr formats:
+
+REG, memory
+REG, REG
+REG, immediate
+memory, REG
+memory, immediate
+*/
 ExecutionUnit.add = function(ops) {
 	var op1 = ops[1];
 	var op2 = ops[2];
