@@ -17,10 +17,14 @@ ExecutionUnit.fetch = function(){
 ExecutionUnit.decode = function(){
 	// Use first character of instruction to lookup the
 	// thing we need to do.
-	path = ExecutionPathLookupTable[this.Instruction[0][0]];
-	this.Operation = path(this.Instruction);
-	if(!this.Operation)
-		throw new Error("Unable to execute " + this.Instruction[0] + " instruction.");
+	var instr = this.Instruction[0];
+	if(!InstructionList.includes(instr)) {
+		throw new Error(instr + " instruction not supported.");
+	} else if(!ExecutionUnit.hasOwnProperty(instr)) {
+		throw new Error(instr + " instruction not implemented.");
+	} else {
+		ExecutionUnit[instr](this.Instruction);
+	}
 }
 
 ExecutionUnit.execute = function(){
@@ -60,10 +64,4 @@ ExecutionUnit.cType = function(ops){
 
 ExecutionUnit.call = function(op1) {
 	var target = Machine.getTarget(op1);
-}
-
-
-var ExecutionPathLookupTable = {
-	"a" : ExecutionUnit.aType,
-	"c" : ExecutionUnit.cType
 }
