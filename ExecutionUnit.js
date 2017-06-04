@@ -1,43 +1,17 @@
-var ExecutionUnit = {};
+var EU = {};
 
-ExecutionUnit.init = function(){
-	this.Instruction;
-  	// Retrieve the instruction sequence
-  	this.InstructionBuffer = Interface.instructions();
-	// We reverse the buffer so that 'pop()' can be used
-	// to extract and remove each instr
-	this.InstructionBuffer.reverse();
+EU.execute = function(){
+	var Instruction = BIU.Instruction;
+	var op = Instruction[0];
+	EU[Instruction[0]](Instruction.splice(1));
+	console.log("Executing " + Instruction[0]);
 }
 
-ExecutionUnit.fetch = function(){
-	this.Instruction = this.InstructionBuffer.pop();
-	if(this.Instruction === undefined)
-		return undefined
+EU.nop = function(ops){
 	return true;
 }
 
-ExecutionUnit.decode = function(){
-	// Use first character of instruction to lookup the
-	// thing we need to do.
-	var instr = this.Instruction[0];
-	if(!InstructionList.includes(instr)) {
-		throw new Error(instr + " instruction not supported.");
-	} else if(!ExecutionUnit.hasOwnProperty(instr)) {
-		throw new Error(instr + " instruction not implemented.");
-	}
-	this.execute();
-}
-
-ExecutionUnit.execute = function(){
-	console.log("Executing " + this.Instruction[0]);
-	ExecutionUnit[this.Instruction[0]](this.Instruction.splice(1));
-}
-
-ExecutionUnit.nop = function(ops){
-	return true;
-}
-
-ExecutionUnit.executionError = function(operation, ...operands){
+EU.executionError = function(operation, ...operands){
 	var operands = [operands];
 	throw new Error("Unable to execute operation " + operation + " with operand(s) " + operands);
 }
@@ -57,7 +31,7 @@ REG, immediate
 memory, REG
 memory, immediate
 */
-ExecutionUnit.add = function(ops) {
+EU.add = function(ops) {
 	var op1 = ops[1];
 	var op2 = ops[2];
 	var target = getTarget(op1);
@@ -82,6 +56,6 @@ function convertImmToReg(val){
 	}
 }
 
-ExecutionUnit.call = function(op1) {
-	var target = Machine.getTargetRegister(op1);
+EU.call = function(op1) {
+	var target = CPU.getTargetRegister(op1);
 }
