@@ -83,5 +83,5 @@ function convertImmToReg(val){
 }
 
 ExecutionUnit.call = function(op1) {
-	var target = Machine.getTarget(op1);
+	var target = Machine.getTargetRegister(op1);
 }

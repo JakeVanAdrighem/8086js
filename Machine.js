@@ -57,7 +57,7 @@ var Memory;
 
 var Machine = {};
 
-Machine.getTarget = function(val){
+Machine.getTargetRegister = function(val){
   // Maybe target is a register
   if(Registers.hasOwnProperty(val)){
 	var ret = Registers[val];
@@ -68,8 +68,6 @@ Machine.getTarget = function(val){
   } else {
 	throw new Error("Invalid operand " + val);
   }
-  //if(validMemoryAddress(val))
-  //  return Address(val);
 }
 
 Machine.cycle = function(){
