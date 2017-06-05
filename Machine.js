@@ -14,23 +14,23 @@ var CPU = {};
 // Because the original hardware had no notion of
 // 'decode', we can just let the EU dispatch to the
 // correct function.
-CPU.cycle = function(){
-  if(!BIU.fetch())
+CPU.cycle = function() {
+  if (!BIU.fetch())
     return undefined;
   EU.execute();
   Interface.update();
   this.cycles += 1;
   return true;
-}
+};
 
-CPU.run = function(){
+CPU.run = function() {
   // Setup chip state for starting execution.
   this.initState();
-  while(this.cycle());
+  while (this.cycle()) {};
   console.log("Executed " + this.cycles + " cycles.");
-}
+};
 
-CPU.initState = function(){
+CPU.initState = function() {
   // Count total cycles executed.
   this.cycles = 0;
   Interface.init();
@@ -45,10 +45,9 @@ CPU.initState = function(){
   //
   Memory = new Array(10000);
   Memory.fill(0000000000000000, 0, Memory.length);
-}
+};
 
 // TODO: Replace this with a button on the main page
 // to start execution. For development purposes we
 // don't want to have to click something each iteration.
 CPU.run();
-
