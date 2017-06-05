@@ -42,8 +42,20 @@ EU.Registers = {
 	PF : 0,
 	CF : 0,
   }
-
 };
+
+EU.getTargetRegister = function(val){
+  // Maybe target is a register
+  if(this.Registers.hasOwnProperty(val)){
+        var ret = this.Registers[val];
+        if(Array.isArray(ret))
+                return ret;
+        else
+                return ret();
+  } else {
+        throw new Error("Invalid operand " + val);
+  }
+}
 
 EU.execute = function(){
 	var Instruction = BIU.Instruction;

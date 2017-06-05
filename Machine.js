@@ -57,19 +57,6 @@ var Memory;
 
 var CPU = {};
 
-CPU.getTargetRegister = function(val){
-  // Maybe target is a register
-  if(Registers.hasOwnProperty(val)){
-	var ret = Registers[val];
-	if(Array.isArray(ret))
-		return ret;
-	else
-		return ret();
-  } else {
-	throw new Error("Invalid operand " + val);
-  }
-}
-
 // Original Execution cycle
 // As documented in the 8086 Family Users Manual
 // Page(s) 2-3/2-4.
