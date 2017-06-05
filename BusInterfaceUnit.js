@@ -1,5 +1,16 @@
 var BIU = {};
 
+BIU.Registers = {
+  // Program Counter
+  IP : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Instruction Pointer
+
+  // Segment Registers
+  CS : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Code Segment
+  DS : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Data Segment
+  ES : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Extra Segment
+  SS : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]  // Stack Segment
+};
+
 BIU.init = function(){
 	this.Instruction;
 	// Retrieve the instruction data
