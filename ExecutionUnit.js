@@ -1,5 +1,50 @@
 var EU = {};
 
+EU.Registers = {
+  // General Registers.
+  AX : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Accumulator
+  BX : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Base
+  CX : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Count
+  DX : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Data
+  AH : (function (){ return this.AX.slice(0, 8); }),
+  AL : (function (){ return this.AX.slice(8,16); }),
+  BH : (function (){ return this.BX.slice(0, 8); }),
+  BL : (function (){ return this.BX.slice(8,16); }),
+  CH : (function (){ return this.CX.slice(0, 8); }),
+  CL : (function (){ return this.CX.slice(8,16); }),
+  DH : (function (){ return this.DX.slice(0, 8); }),
+  DL : (function (){ return this.DX.slice(8,16); }),
+
+  SP : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Stack Pointer
+  BP : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Base Pointer
+  SI : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Source Index
+  DI : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Destination Index
+
+  //  -- Control Flags
+  // Trap (TF)
+  // Direction (DF)
+  // Interrupt-Enable (IF)
+  //  -- Status Flags
+  // Overflow Flag (OF)
+  // Sign Flag(SF)
+  // Zero Flag (ZF)
+  // Auxiliary carry Flag (AF)
+  // Parity Flag (PF)
+  // Carry Flag (CF)
+  FLAGS : {
+	TF : 0,
+	DF : 0,
+	IF : 0,
+	OF : 0,
+	SF : 0,
+	ZF : 0,
+	AF : 0,
+	PF : 0,
+	CF : 0,
+  }
+
+};
+
 EU.execute = function(){
 	var Instruction = BIU.Instruction;
 	var op = Instruction[0];
